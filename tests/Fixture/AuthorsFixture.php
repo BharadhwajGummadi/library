@@ -43,9 +43,9 @@ class AuthorsFixture extends TestFixture
             'id' => 1,
             'first_name' => 'Lorem ipsum dolor sit amet',
             'last_name' => 'Lorem ipsum dolor sit amet',
-            'date_of_birth' => '2016-01-22 06:19:27',
-            'created' => '2016-01-22 06:19:27',
-            'modified' => '2016-01-22 06:19:27'
+            'date_of_birth' => '2016-02-05 06:48:42',
+            'created' => '2016-02-05 06:48:42',
+            'modified' => '2016-02-05 06:48:42'
         ],
     ];
 }

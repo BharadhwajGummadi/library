@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Genres
  * @property \Cake\ORM\Association\BelongsTo $Authors
+ * @property \Cake\ORM\Association\HasMany $BookIssues
  */
 class BooksTable extends Table
 {
@@ -40,6 +41,9 @@ class BooksTable extends Table
             'foreignKey' => 'author_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('BookIssues', [
+            'foreignKey' => 'book_id'
+        ]);
     }
 
     /**
@@ -55,11 +59,18 @@ class BooksTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('name');
+            ->allowEmpty('title');
 
         $validator
             ->add('published_on', 'valid', ['rule' => 'datetime'])
             ->allowEmpty('published_on');
+
+        $validator
+            ->add('price', 'valid', ['rule' => 'decimal'])
+            ->allowEmpty('price');
+
+        $validator
+            ->allowEmpty('rack_number');
 
         return $validator;
     }

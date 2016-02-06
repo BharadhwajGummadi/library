@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * Book Entity.
  *
  * @property int $id
- * @property string $name
+ * @property string $title
  * @property int $genre_id
  * @property \App\Model\Entity\Genre $genre
  * @property int $author_id
@@ -15,6 +15,9 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $published_on
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
+ * @property float $price
+ * @property string $rack_number
+ * @property \App\Model\Entity\BookIssue[] $book_issues
  */
 class Book extends Entity
 {

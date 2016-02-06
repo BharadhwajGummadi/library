@@ -4,18 +4,20 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * User Entity.
+ * BookIssue Entity.
  *
  * @property int $id
- * @property string $first_name
- * @property string $last_name
- * @property string $email
- * @property string $phone_number
+ * @property int $user_id
+ * @property \App\Model\Entity\User $user
+ * @property int $book_id
+ * @property \App\Model\Entity\Book $book
+ * @property \Cake\I18n\Time $issue_on
+ * @property \Cake\I18n\Time $return_date
+ * @property \Cake\I18n\Time $returned_date
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
- * @property \App\Model\Entity\BookIssue[] $book_issues
  */
-class User extends Entity
+class BookIssue extends Entity
 {
 
     /**

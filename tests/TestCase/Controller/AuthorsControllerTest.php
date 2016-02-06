@@ -27,7 +27,9 @@ class AuthorsControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $result = $this->get('/authors');
+        $this->assertContains('status":"success","code":200,', $result);
+        //$this->markTestIncomplete('Not implemented yet.');
     }
 
     /**

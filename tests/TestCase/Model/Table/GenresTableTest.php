@@ -18,7 +18,10 @@ class GenresTableTest extends TestCase
      */
     public $fixtures = [
         'app.genres',
-        'app.books'
+        'app.books',
+        'app.authors',
+        'app.book_issues',
+        'app.users'
     ];
 
     /**

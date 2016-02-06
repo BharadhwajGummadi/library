@@ -1,18 +1,19 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\User;
+use App\Model\Entity\BookIssue;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Users Model
+ * BookIssues Model
  *
- * @property \Cake\ORM\Association\HasMany $BookIssues
+ * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\BelongsTo $Books
  */
-class UsersTable extends Table
+class BookIssuesTable extends Table
 {
 
     /**
@@ -25,14 +26,17 @@ class UsersTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('users');
+        $this->table('book_issues');
         $this->displayField('id');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('BookIssues', [
+        $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
+        ]);
+        $this->belongsTo('Books', [
+            'foreignKey' => 'book_id'
         ]);
     }
 
@@ -46,21 +50,19 @@ class UsersTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
-            ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('first_name');
+            ->add('issue_on', 'valid', ['rule' => 'datetime'])
+            ->allowEmpty('issue_on');
 
         $validator
-            ->allowEmpty('last_name');
+            ->add('return_date', 'valid', ['rule' => 'datetime'])
+            ->allowEmpty('return_date');
 
         $validator
-            ->add('email', 'valid', ['rule' => 'email'])
-            ->allowEmpty('email');
-
-        $validator
-            ->allowEmpty('phone_number');
+            ->add('returned_date', 'valid', ['rule' => 'datetime'])
+            ->allowEmpty('returned_date');
 
         return $validator;
     }
@@ -74,8 +76,8 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->isUnique(['id']));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['book_id'], 'Books'));
         return $rules;
     }
 }
